@@ -47,7 +47,7 @@ class ItemDecorationDivider(context: Context, orientation: Int): RecyclerView.It
         }
     }
 
-    fun drawVertical(c: Canvas, parent: RecyclerView) {
+    private fun drawVertical(c: Canvas, parent: RecyclerView) {
         if (parent.childCount == 0) return
 
         val left = parent.paddingLeft
@@ -70,7 +70,7 @@ class ItemDecorationDivider(context: Context, orientation: Int): RecyclerView.It
         }
     }
 
-    fun drawHorizontal(c: Canvas, parent: RecyclerView) {
+    private fun drawHorizontal(c: Canvas, parent: RecyclerView) {
         val top = parent.paddingTop
         val bottom = parent.height - parent.paddingBottom
 

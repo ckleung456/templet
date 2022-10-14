@@ -1,4 +1,4 @@
-package com.ck.myapplication
+package com.ck.myapplication.repository.network
 
 class APIConstants constructor() {
     companion object {

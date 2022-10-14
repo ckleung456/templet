@@ -1,5 +1,0 @@
-package com.ck.myapplication
-
-import androidx.lifecycle.DefaultLifecycleObserver
-
-interface MyPresenter: DefaultLifecycleObserver
