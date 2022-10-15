@@ -2,6 +2,7 @@ package com.ck.myapplication.sample.ui.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,8 +59,9 @@ class ListFragment : Fragment() {
                 null, is SampleActivityViewStateModel.SquareList -> SquaresAdapter()
                 is SampleActivityViewStateModel.ApiPhotoList -> TestApiAdapter(
                     isRounding = state.isRounding
-                ) {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                ) { urlLink ->
+                    Log.w(TAG, urlLink)
+                    Toast.makeText(requireContext(), urlLink, Toast.LENGTH_SHORT).show()
                 }
                 else -> SquaresAdapter()
             }

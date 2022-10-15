@@ -55,10 +55,15 @@ class AppModule {
     @Provides
     fun provideService() = Retrofit.Builder()
         .client(
-            OkHttpClient.Builder()
-                .addInterceptor(
-                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                )
+            OkHttpClient.Builder().apply {
+                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//                addInterceptor {  chain ->
+//                    //Add necessary general headers here
+//                    val requestBuilder = chain.request().newBuilder()
+//                    requestBuilder.addHeader("", "")
+//                    chain.proceed(requestBuilder.build())
+//                }
+            }
                 .build()
         )
         .baseUrl("$SERVICE_ENDPOINT/")
