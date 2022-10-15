@@ -29,6 +29,7 @@ buildscript {
     ext.mockk = '1.11.0'
     ext.kotlin_coroutine = '1.6.4'
     ext.kotlin_coroutine_test = '1.4.3'
+    ext.jupiter = '5.8.2'
 
     repositories {
         google()

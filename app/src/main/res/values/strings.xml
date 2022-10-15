@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="action_settings">Settings</string>
+
+    <string name="picker_square_list">Square List</string>
+    <string name="picker_square_api_list">Square API List</string>
+    <string name="picker_round_api_list">Round API List</string>
 </resources>

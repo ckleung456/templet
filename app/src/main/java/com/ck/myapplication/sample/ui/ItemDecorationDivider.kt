@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-
-class ItemDecorationDivider(context: Context, orientation: Int): RecyclerView.ItemDecoration() {
+class ItemDecorationDivider(context: Context, orientation: Int) : RecyclerView.ItemDecoration() {
 
     private val ATTRS = intArrayOf(android.R.attr.listDivider)
 
@@ -85,7 +84,12 @@ class ItemDecorationDivider(context: Context, orientation: Int): RecyclerView.It
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, 0, 0, mDivider!!.intrinsicHeight)
         } else if (mOrientation == HORIZONTAL_LIST) {

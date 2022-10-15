@@ -3,8 +3,8 @@ package com.ck.myapplication.base.usecase
 import com.ck.myapplication.base.repository.network.RetrofitException
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.*
 
 interface UseCase<in INPUT, out RESULT> {
     operator fun invoke(
@@ -76,7 +76,8 @@ abstract class FlowUseCase<in INPUT, out RESULT>(private val dispatcherMain: Cor
 }
 
 sealed class UseCaseOutputWithStatus<out RESULT> {
-    data class Progress<out RESULT>(val data: Any? = null): UseCaseOutputWithStatus<RESULT>()
-    data class Success<out RESULT>(val result: RESULT): UseCaseOutputWithStatus<RESULT>()
-    data class Failed<out RESULT>(val error: RetrofitException, val failedResult: RESULT? = null): UseCaseOutputWithStatus<RESULT>()
+    data class Progress<out RESULT>(val data: Any? = null) : UseCaseOutputWithStatus<RESULT>()
+    data class Success<out RESULT>(val result: RESULT) : UseCaseOutputWithStatus<RESULT>()
+    data class Failed<out RESULT>(val error: RetrofitException, val failedResult: RESULT? = null) :
+        UseCaseOutputWithStatus<RESULT>()
 }

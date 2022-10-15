@@ -1,11 +1,10 @@
 package com.ck.myapplication.sample.network
 
 import android.os.Parcelable
-import com.ck.myapplication.sample.model.Hit
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class APIDataModel (val totalHits: Int?, val hits: ArrayList<APIHit>?): Parcelable
+data class APIDataModel(val totalHits: Int?, val hits: List<APIHit>?) : Parcelable
 
 @Parcelize
 data class APIHit(

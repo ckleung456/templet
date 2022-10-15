@@ -18,8 +18,8 @@ import javax.inject.Inject
 class GetPixaBayUseCase @Inject constructor(
     @DispatcherMain private val mainDispatcher: CoroutineDispatcher,
     @DispatcherIO private val ioDispatcher: CoroutineDispatcher,
-    private val  interactor: FetchPixaBayInteractor
-): FlowUseCase<Unit, GetPixaBayUseCase.Output>(dispatcherMain = mainDispatcher){
+    private val interactor: FetchPixaBayInteractor
+) : FlowUseCase<Unit, GetPixaBayUseCase.Output>(dispatcherMain = mainDispatcher) {
 
     override suspend fun getFlow(input: Unit): Flow<Output> = interactor
         .getPixaBay()
@@ -40,5 +40,5 @@ class GetPixaBayUseCase @Inject constructor(
     data class Output(
         val totalHits: Int,
         val hitsImage: List<Hit>
-    ): Parcelable
+    ) : Parcelable
 }

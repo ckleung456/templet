@@ -28,7 +28,7 @@ fun View.setOnThrottleClickListener(throttleInterval: Long? = null, onClickFn: (
 class OnThrottleClickListener(
     private val interval: Long = DEFAULT_THROTTLE_TIME,
     private val fn: (View?) -> Unit
-): View.OnClickListener {
+) : View.OnClickListener {
     private var lastClickTime = 0L
 
     override fun onClick(view: View?) {

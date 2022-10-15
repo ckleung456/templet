@@ -6,20 +6,54 @@ import retrofit2.Retrofit
 import java.io.IOException
 import java.lang.reflect.Type
 
-class RetrofitException private constructor(message: String?, url: String, response: Response<*>?, successType: Type?, kind: Kind,
-                                            exception: Throwable?, retrofit: Retrofit?, gson: Gson): RuntimeException(message, exception) {
+class RetrofitException private constructor(
+    message: String?, url: String, response: Response<*>?, successType: Type?, kind: Kind,
+    exception: Throwable?, retrofit: Retrofit?, gson: Gson
+) : RuntimeException(message, exception) {
     companion object {
         fun networkError(exception: IOException): RetrofitException {
-            return RetrofitException(exception.message, "", null, null, Kind.NETWORK, exception, null, Gson())
+            return RetrofitException(
+                exception.message,
+                "",
+                null,
+                null,
+                Kind.NETWORK,
+                exception,
+                null,
+                Gson()
+            )
         }
 
-        fun httpError(url: String, response: Response<*>, retrofit: Retrofit, successType: Type): RetrofitException {
+        fun httpError(
+            url: String,
+            response: Response<*>,
+            retrofit: Retrofit,
+            successType: Type
+        ): RetrofitException {
             val message = response.code().toString() + " " + response.message()
-            return RetrofitException(message, url, response, successType, Kind.HTTP, null, retrofit, Gson())
+            return RetrofitException(
+                message,
+                url,
+                response,
+                successType,
+                Kind.HTTP,
+                null,
+                retrofit,
+                Gson()
+            )
         }
 
         fun unexpectedError(exception: Throwable): RetrofitException {
-            return RetrofitException(exception.message!!, "", null, null, Kind.UNEXPECTED, exception, null, Gson())
+            return RetrofitException(
+                exception.message!!,
+                "",
+                null,
+                null,
+                Kind.UNEXPECTED,
+                exception,
+                null,
+                Gson()
+            )
         }
     }
 
@@ -31,14 +65,17 @@ class RetrofitException private constructor(message: String?, url: String, respo
          * An [IOException] occurred while communicating to the server.
          */
         NETWORK,
+
         /**
          * An exception was thrown while (de)serializing a body.
          */
         CONVERSION,
+
         /**
          * A non-200 HTTP status code was received from the server.
          */
         HTTP,
+
         /**
          * An internal error occurred while attempting to execute a request. It is best practice to
          * re-throw this exception so your application crashes.

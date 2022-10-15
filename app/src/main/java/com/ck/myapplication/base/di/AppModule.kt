@@ -1,8 +1,8 @@
 package com.ck.myapplication.base.di
 
 import android.content.Context
-import com.ck.myapplication.sample.network.APIConstants.Companion.SERVICE_ENDPOINT
 import com.ck.myapplication.base.repository.network.FlowErrorHandlingCallAdapterFactory
+import com.ck.myapplication.sample.network.APIConstants.Companion.SERVICE_ENDPOINT
 import com.ck.myapplication.sample.network.TestAPIs
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
@@ -23,7 +23,8 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideSharedPreferences(context: Context) = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+    fun provideSharedPreferences(context: Context) =
+        context.getSharedPreferences("MyApp", Context.MODE_PRIVATE)
 
     @Singleton
     @Provides

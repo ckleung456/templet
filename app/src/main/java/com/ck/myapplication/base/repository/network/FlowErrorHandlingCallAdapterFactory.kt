@@ -9,12 +9,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import retrofit2.Call
-import retrofit2.CallAdapter
-import retrofit2.Callback
-import retrofit2.HttpException
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -29,8 +24,10 @@ import kotlin.coroutines.resumeWithException
 class FlowErrorHandlingCallAdapterFactory @Inject constructor() : CallAdapter.Factory() {
     companion object {
         private const val TAG = "Frb.FlowErrorHandlingCallAdapterFactory"
-        private const val ERROR_FLOW_RETURN_TYPE = "flow return type must be parameterized as Flow<xxx>"
-        private const val ERROR_ILLEGAL_RESPONSE_TYPE = "Response must be parameterized as Response<xxx> or Response<out xxx>"
+        private const val ERROR_FLOW_RETURN_TYPE =
+            "flow return type must be parameterized as Flow<xxx>"
+        private const val ERROR_ILLEGAL_RESPONSE_TYPE =
+            "Response must be parameterized as Response<xxx> or Response<out xxx>"
         private const val ERROR_EMPTY_RESPONSE_BODY = "Response body is null: "
 
         private fun Call<*>.registerOnCancellation(continuation: CancellableContinuation<*>) {
@@ -70,7 +67,8 @@ class FlowErrorHandlingCallAdapterFactory @Inject constructor() : CallAdapter.Fa
                         is SocketTimeoutException,
                         is UnknownHostException -> {
                             val ioException = IOException(
-                                if (throwable is SocketTimeoutException) "Networt timeout" else "Network issue")
+                                if (throwable is SocketTimeoutException) "Networt timeout" else "Network issue"
+                            )
                             Log.e(TAG, ioException.message, ioException)
                             continuation.resumeWithException(
                                 networkError(ioException)
