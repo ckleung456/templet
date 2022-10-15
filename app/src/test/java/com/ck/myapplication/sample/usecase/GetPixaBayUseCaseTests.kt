@@ -60,7 +60,9 @@ class GetPixaBayUseCaseTests {
         val exceptedId = 1L
         val exceptedUrl = "URL"
         every {
-            interactorMock.getPixaBay()
+            interactorMock.getPixaBay(
+                animalName = "tiger"
+            )
         } returns flowOf(apiDataModelMock)
 
         every {
@@ -77,7 +79,7 @@ class GetPixaBayUseCaseTests {
         } returns exceptedUrl
 
         //WHEN
-        underTests?.invoke(input = Unit, onResultFn = onResultFnMock)
+        underTests?.invoke(input = "tiger", onResultFn = onResultFnMock)
 
         //THEN
         verify {
@@ -100,13 +102,15 @@ class GetPixaBayUseCaseTests {
     fun `invoke  failed`() = runBlocking {
         //GIVEN
         every {
-            interactorMock.getPixaBay()
+            interactorMock.getPixaBay(
+                animalName = "tiger"
+            )
         } returns flow {
             throw retrofitExceptionMock
         }
 
         //WHEN
-        underTests?.invoke(input = Unit, onResultFn = onResultFnMock)
+        underTests?.invoke(input = "tiger", onResultFn = onResultFnMock)
 
         //THEN
         verify {

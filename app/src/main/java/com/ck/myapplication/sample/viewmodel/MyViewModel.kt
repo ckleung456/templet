@@ -54,7 +54,7 @@ class MyViewModel @Inject constructor(
             } else if (state  is SampleActivityViewStateModel.ApiPhotoList) {
                 getPixaBayUseCase
                     .invoke(
-                        input = Unit
+                        input = "tiger"
                     ) { state ->
                         when (state) {
                             is UseCaseOutputWithStatus.Progress -> {}

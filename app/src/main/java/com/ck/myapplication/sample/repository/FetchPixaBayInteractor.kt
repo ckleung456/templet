@@ -9,5 +9,9 @@ import javax.inject.Inject
 class FetchPixaBayInteractor @Inject constructor(
     private val service: TestAPIs
 ) {
-    fun getPixaBay() = service.fetchAPI()
+    fun getPixaBay(
+        animalName: String
+    ) = service.fetchAPI(
+        animalName = animalName
+    )
 }

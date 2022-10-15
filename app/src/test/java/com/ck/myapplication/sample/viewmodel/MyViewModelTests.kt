@@ -18,6 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 class MyViewModelTests {
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -97,7 +98,7 @@ class MyViewModelTests {
         coEvery {
             useCaseMock
                 .invoke(
-                    input = Unit,
+                    input = "tiger",
                     onResultFn = capture(methodSlot)
                 )
         } answers {

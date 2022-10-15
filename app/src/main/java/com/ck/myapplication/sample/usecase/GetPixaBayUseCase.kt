@@ -19,10 +19,12 @@ class GetPixaBayUseCase @Inject constructor(
     @DispatcherMain private val mainDispatcher: CoroutineDispatcher,
     @DispatcherIO private val ioDispatcher: CoroutineDispatcher,
     private val interactor: FetchPixaBayInteractor
-) : FlowUseCase<Unit, GetPixaBayUseCase.Output>(dispatcherMain = mainDispatcher) {
+) : FlowUseCase<String, GetPixaBayUseCase.Output>(dispatcherMain = mainDispatcher) {
 
-    override suspend fun getFlow(input: Unit): Flow<Output> = interactor
-        .getPixaBay()
+    override suspend fun getFlow(input: String): Flow<Output> = interactor
+        .getPixaBay(
+            animalName = input
+        )
         .map {
             Output(
                 totalHits = it.totalHits ?: 0,
