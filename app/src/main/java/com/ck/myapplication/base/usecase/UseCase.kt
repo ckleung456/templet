@@ -4,6 +4,7 @@ import com.ck.myapplication.base.repository.network.RetrofitException
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 interface UseCase<in INPUT, out RESULT> {
@@ -35,7 +36,7 @@ interface CoroutineUseCase<in INPUT, out RESULT> {
     )
 }
 
-abstract class FlowUseCase<in INPUT, out RESULT>(private val dispatcherMain: CoroutineDispatcher) {
+abstract class FlowUseCase<in INPUT, out RESULT>() {
     /**
      * Implement this in use case
      */
@@ -47,6 +48,8 @@ abstract class FlowUseCase<in INPUT, out RESULT>(private val dispatcherMain: Cor
      * Implement this method if you need more logic to handle your error and results different RESULT type
      */
     protected open suspend fun errorResult(error: Throwable): RESULT? = null
+
+    protected open fun downstreamThread(): CoroutineDispatcher = Dispatchers.Main
 
     /**
      * Call this in view model
@@ -71,7 +74,7 @@ abstract class FlowUseCase<in INPUT, out RESULT>(private val dispatcherMain: Cor
                 )
             )
         }
-        .flowOn(dispatcherMain)
+        .flowOn(downstreamThread())
         .collect()
 }
 

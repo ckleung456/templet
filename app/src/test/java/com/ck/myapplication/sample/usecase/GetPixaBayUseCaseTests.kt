@@ -2,6 +2,7 @@ package com.ck.myapplication.sample.usecase
 
 import com.ck.myapplication.base.repository.network.RetrofitException
 import com.ck.myapplication.base.usecase.UseCaseOutputWithStatus
+import com.ck.myapplication.sample.CoroutineTestRule
 import com.ck.myapplication.sample.model.Hit
 import com.ck.myapplication.sample.network.APIDataModel
 import com.ck.myapplication.sample.network.APIHit
@@ -17,9 +18,14 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 class GetPixaBayUseCaseTests {
+    @get:Rule
+    val rule = CoroutineTestRule()
+
     @MockK
     lateinit var interactorMock:  FetchPixaBayInteractor
 
@@ -41,8 +47,6 @@ class GetPixaBayUseCaseTests {
     fun `set up`() {
         MockKAnnotations.init(this, relaxed = true)
         underTests = GetPixaBayUseCase(
-            mainDispatcher = Dispatchers.Unconfined,
-            ioDispatcher = Dispatchers.Unconfined,
             interactor = interactorMock
         )
     }
