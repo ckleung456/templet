@@ -11,7 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ck.myapplication.base.utils.observe
+import com.ck.core.utils.observe
 import com.ck.myapplication.databinding.ContentMainBinding
 import com.ck.myapplication.sample.model.SampleActivityViewStateModel
 import com.ck.myapplication.sample.ui.ItemDecorationDivider

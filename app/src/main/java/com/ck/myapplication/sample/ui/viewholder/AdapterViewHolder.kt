@@ -1,12 +1,12 @@
 package com.ck.myapplication.sample.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.ck.myapplication.base.utils.setGone
-import com.ck.myapplication.base.utils.setOnThrottleClickListener
-import com.ck.myapplication.base.utils.setVisible
+import com.ck.core.utils.loadImage
+import com.ck.core.utils.setGone
+import com.ck.core.utils.setOnSafeClickListener
+import com.ck.core.utils.setVisible
 import com.ck.myapplication.databinding.AdapterBinding
 import com.ck.myapplication.sample.model.Hit
-import com.squareup.picasso.Picasso
 
 class AdapterViewHolder(
     private val binding: AdapterBinding,
@@ -16,7 +16,7 @@ class AdapterViewHolder(
     private var hit: Hit? = null
 
     init {
-        itemView.setOnThrottleClickListener {
+        itemView.setOnSafeClickListener {
             hit?.let { i ->
                 onClick.invoke(i.largeImageURL)
             }
@@ -33,13 +33,11 @@ class AdapterViewHolder(
     fun onBinding(hit: Hit) {
         this.hit = hit
         if (hit.largeImageURL.isNotEmpty()) {
-            Picasso.get().load(hit.largeImageURL).into(
-                if (isRounding) {
-                    binding.largeImageRound
-                } else {
-                    binding.largeImage
-                }
-            )
+            if (isRounding) {
+                binding.largeImageRound
+            } else {
+                binding.largeImage
+            }.loadImage(imageUri = hit.largeImageURL)
         }
     }
 }

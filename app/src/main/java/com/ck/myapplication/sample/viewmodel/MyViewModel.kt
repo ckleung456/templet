@@ -3,7 +3,7 @@ package com.ck.myapplication.sample.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.ck.myapplication.R
-import com.ck.myapplication.base.usecase.UseCaseOutputWithStatus
+import com.ck.core.usecase.UseCaseOutputWithStatus
 import com.ck.myapplication.sample.model.DataModel
 import com.ck.myapplication.sample.model.Hit
 import com.ck.myapplication.sample.model.SampleActivityViewStateModel
@@ -45,7 +45,7 @@ class MyViewModel @Inject constructor(
                         } else if (mod == 2) {
                             R.color.colorPrimaryDark
                         } else {
-                            R.color.abc_color_highlight_material
+                            com.google.android.material.R.color.abc_color_highlight_material
                         }
                         list.add(DataModel(i, colorId))
                     }

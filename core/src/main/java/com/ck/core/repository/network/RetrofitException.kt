@@ -1,4 +1,4 @@
-package com.ck.myapplication.base.repository.network
+package com.ck.core.repository.network
 
 import com.google.gson.Gson
 import retrofit2.Response

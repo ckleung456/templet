@@ -2,7 +2,6 @@ package com.ck.myapplication.sample.network
 
 class APIConstants {
     companion object {
-        const val SERVICE_ENDPOINT = "https://pixabay.com"
         const val QUERY_KEY = "key"
         const val QUERY_IMAGE_TYPE = "image_type"
         const val QUERY_PRETTY = "pretty"

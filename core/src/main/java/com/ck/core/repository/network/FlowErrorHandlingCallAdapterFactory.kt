@@ -1,9 +1,9 @@
-package com.ck.myapplication.base.repository.network
+package com.ck.core.repository.network
 
 import android.util.Log
-import com.ck.myapplication.base.repository.network.RetrofitException.Companion.httpError
-import com.ck.myapplication.base.repository.network.RetrofitException.Companion.networkError
-import com.ck.myapplication.base.repository.network.RetrofitException.Companion.unexpectedError
+import com.ck.core.repository.network.RetrofitException.Companion.httpError
+import com.ck.core.repository.network.RetrofitException.Companion.networkError
+import com.ck.core.repository.network.RetrofitException.Companion.unexpectedError
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

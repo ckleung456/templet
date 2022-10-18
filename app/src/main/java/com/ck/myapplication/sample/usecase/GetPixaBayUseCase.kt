@@ -1,7 +1,7 @@
 package com.ck.myapplication.sample.usecase
 
 import android.os.Parcelable
-import com.ck.myapplication.base.usecase.FlowUseCase
+import com.ck.core.usecase.FlowUseCase
 import com.ck.myapplication.sample.model.Hit
 import com.ck.myapplication.sample.repository.FetchPixaBayInteractor
 import dagger.hilt.android.scopes.ViewModelScoped

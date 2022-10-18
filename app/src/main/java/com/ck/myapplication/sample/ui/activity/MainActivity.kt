@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.ck.myapplication.R
-import com.ck.myapplication.base.utils.observeEvent
+import com.ck.core.utils.observeEvent
 import com.ck.myapplication.databinding.ActivityMainBinding
 import com.ck.myapplication.sample.model.SampleActivityViewStateModel
 import com.ck.myapplication.sample.ui.fragment.ListFragment
@@ -23,18 +23,36 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel.viewLiveState.observeEvent(lifecycleOwner = this) { state ->
             when (state) {
-                is SampleActivityViewStateModel.Picker -> supportFragmentManager.beginTransaction()
-                    .add(
-                        R.id.container,
-                        PickerListFragment.newInstance(),
-                        PickerListFragment.TAG
-                    ).commit()
-                else -> supportFragmentManager.beginTransaction().add(
-                    R.id.container,
-                    ListFragment.newInstance(pickerState = state),
-                    ListFragment.TAG
-                ).addToBackStack(ListFragment.TAG).commit()
+                is SampleActivityViewStateModel.Picker -> launchPicker(isRestore = savedInstanceState != null)
+                else -> launchImagePage(
+                    isRestore = savedInstanceState != null,
+                    state = state
+                )
             }
+        }
+    }
+
+    private fun launchPicker(isRestore: Boolean) {
+        if (isRestore.not()) {
+            supportFragmentManager.beginTransaction()
+                .add(
+                    R.id.container,
+                    PickerListFragment.newInstance(),
+                    PickerListFragment.TAG
+                ).commit()
+        }
+    }
+
+    private fun launchImagePage(
+        isRestore: Boolean,
+        state: SampleActivityViewStateModel
+    ) {
+        if (isRestore.not()) {
+            supportFragmentManager.beginTransaction().add(
+                R.id.container,
+                ListFragment.newInstance(pickerState = state),
+                ListFragment.TAG
+            ).addToBackStack(ListFragment.TAG).commit()
         }
     }
 }

@@ -1,11 +1,10 @@
 package com.ck.myapplication.base.di
 
 import android.content.Context
-import com.ck.myapplication.base.repository.network.FlowErrorHandlingCallAdapterFactory
-import com.ck.myapplication.sample.network.APIConstants.Companion.SERVICE_ENDPOINT
+import com.ck.core.repository.network.FlowErrorHandlingCallAdapterFactory
+import com.ck.myapplication.BuildConfig.SERVER_ENDPOINT
 import com.ck.myapplication.sample.network.TestAPIs
 import com.google.gson.GsonBuilder
-import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,10 +24,6 @@ class AppModule {
     @Provides
     fun provideSharedPreferences(context: Context) =
         context.getSharedPreferences("MyApp", Context.MODE_PRIVATE)
-
-    @Singleton
-    @Provides
-    fun providePicasso() = Picasso.get()
 
     @DispatcherMain
     @Singleton
@@ -53,7 +48,9 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideService() = Retrofit.Builder()
+    fun provideService(
+        flowErrorHandlingCallAdapterFactory: FlowErrorHandlingCallAdapterFactory
+    ) = Retrofit.Builder()
         .client(
             OkHttpClient.Builder().apply {
                 addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -66,8 +63,8 @@ class AppModule {
             }
                 .build()
         )
-        .baseUrl("$SERVICE_ENDPOINT/")
-        .addCallAdapterFactory(FlowErrorHandlingCallAdapterFactory())
+        .baseUrl("$SERVER_ENDPOINT/")
+        .addCallAdapterFactory(flowErrorHandlingCallAdapterFactory)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .build()
         .create(TestAPIs::class.java)

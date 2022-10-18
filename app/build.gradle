@@ -1,12 +1,11 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id ("kotlin-android-extensions")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
 
 android {
     compileSdkVersion 32
@@ -37,7 +36,18 @@ android {
     }
 }
 
+secrets {
+    // Optionally specify a different file name containing your secrets.
+    // The plugin defaults to "local.properties"
+//    propertiesFileName = "gradle.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = 'local.properties'
+}
+
 dependencies {
+    implementation project(":core")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -72,17 +82,12 @@ dependencies {
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$kotlin_coroutine"
 
-    implementation "com.squareup.picasso:picasso:$picasso"
     implementation "com.squareup.okhttp3:okhttp:$okhttp"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation "com.google.code.gson:gson:$gson"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation "androidx.test:runner:$testRunner"

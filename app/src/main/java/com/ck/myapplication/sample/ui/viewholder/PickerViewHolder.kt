@@ -1,8 +1,8 @@
 package com.ck.myapplication.sample.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.ck.core.utils.setOnSafeClickListener
 import com.ck.myapplication.R
-import com.ck.myapplication.base.utils.setOnThrottleClickListener
 import com.ck.myapplication.databinding.AdapterPickerBinding
 import com.ck.myapplication.sample.model.SampleActivityViewStateModel
 
@@ -14,7 +14,7 @@ class PickerViewHolder constructor(
     private var state: SampleActivityViewStateModel? = null
 
     init {
-        binding.root.setOnThrottleClickListener {
+        binding.root.setOnSafeClickListener {
             state?.let { state ->
                 onClick.invoke(state)
             }

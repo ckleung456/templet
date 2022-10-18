@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.ck.myapplication.base.utils.Event
-import com.ck.myapplication.base.utils.fireEvent
+import com.ck.core.utils.Event
+import com.ck.core.utils.fireEvent
 import com.ck.myapplication.sample.model.SampleActivityViewStateModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

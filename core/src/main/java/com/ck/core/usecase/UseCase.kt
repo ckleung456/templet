@@ -1,8 +1,6 @@
-package com.ck.myapplication.base.usecase
+package com.ck.core.usecase
 
-import com.ck.myapplication.base.repository.network.RetrofitException
-import io.reactivex.Single
-import io.reactivex.disposables.Disposable
+import com.ck.core.repository.network.RetrofitException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -14,21 +12,6 @@ interface UseCase<in INPUT, out RESULT> {
     )
 }
 
-interface RxUseCase<in INPUT, out RESULT> {
-    operator fun invoke(
-        input: INPUT,
-        onResultFn: (RESULT) -> Unit = {}
-    ): Disposable
-}
-
-/**
- * Use this in worker in most of the case
- * Use other use cases if possible
- */
-interface RxSingleUseCase<in INPUT, RESULT> {
-    operator fun invoke(input: INPUT): Single<RESULT>
-}
-
 interface CoroutineUseCase<in INPUT, out RESULT> {
     suspend operator fun invoke(
         input: INPUT,
@@ -36,7 +19,7 @@ interface CoroutineUseCase<in INPUT, out RESULT> {
     )
 }
 
-abstract class FlowUseCase<in INPUT, out RESULT>() {
+abstract class FlowUseCase<in INPUT, out RESULT> {
     /**
      * Implement this in use case
      */

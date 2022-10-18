@@ -1,6 +1,6 @@
 package com.ck.myapplication.sample.usecase
 
-import com.ck.myapplication.base.repository.network.RetrofitException
+import com.ck.core.repository.network.RetrofitException
 import com.ck.myapplication.base.usecase.UseCaseOutputWithStatus
 import com.ck.myapplication.sample.CoroutineTestRule
 import com.ck.myapplication.sample.model.Hit
@@ -12,7 +12,6 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.unmockkAll
 import io.mockk.verify
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -39,7 +38,7 @@ class GetPixaBayUseCaseTests {
     lateinit var apiHitMock: APIHit
 
     @MockK
-    lateinit var retrofitExceptionMock: RetrofitException
+    lateinit var retrofitExceptionMock: com.ck.core.repository.network.RetrofitException
 
     private var underTests: GetPixaBayUseCase? = null
 
